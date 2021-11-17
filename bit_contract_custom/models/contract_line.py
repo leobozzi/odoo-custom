@@ -5,6 +5,9 @@ from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools.translate import _
 
+import datetime
+import dateutil
+
 
 class ContractLine(models.Model):
     _inherit = 'contract.line'
@@ -18,12 +21,17 @@ class ContractLine(models.Model):
             if product_id.automatic_price:
                 vals['automatic_price'] = True
             if product_id.property_contract_template_id.recurring_day != 0:
-                raise ValidationError("Test: %s" % (vals))
-        res = super(ContractLine, self).create(vals_list)
+                recurring_next_date = datetime.datetime.now().replace(day=product_id.property_contract_template_id.recurring_day) if not product_id.property_contract_template_id.recurring_next_month else datetime.datetime.now(
+                ).replace(day=product_id.property_contract_template_id.recurring_day) + dateutil.relativedelta.relativedelta(months=1)
+
+            raise ValidationError("Test: %s ***" %
+                                  (recurring_next_date.date()))
+        res = super(ContractLine, self).create(
+            vals_list)
         return res
 
-    # Write Method
-    def write(self, vals):
-        #raise ValidationError("Test: %s" % (vals))
-        res = super(ContractLine, self).write(vals)
-        return res
+        # Write Method
+        def write(self, vals):
+            # raise ValidationError("Test: %s" % (vals))
+            res = super(ContractLine, self).write(vals)
+            return res
