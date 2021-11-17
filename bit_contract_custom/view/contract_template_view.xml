@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="bit_contract_custom_contract_template_form_view" model="ir.ui.view">
+		<field name="name">bit.contract.custom.contract.template.form.view</field>
+        <field name="model">contract.template</field>
+        <field name="inherit_id" ref="contract.contract_template_form_view" />
+        <field name="arch" type="xml">
+					<xpath expr="//group[@name='group_main']//group[@name='group_main_left']" position="after">
+						<group name="group_main_right" modifiers="{}">
+							<field name="recurring_day" help="Día del mes que se realizará la facturación. Si es cero, no modificará la fecha de la próxima factura."/>
+							<field name="recurring_next_month" attrs="{'invisible': [('recurring_day','=',0)]}" help="Si está seleccionado, cuando se crea el contrato o la línea de contrato, la facturación iniciará a partir del próximo mes."/>
+						</group>
+					</xpath>
+				</field>
+  </record>
+</odoo>

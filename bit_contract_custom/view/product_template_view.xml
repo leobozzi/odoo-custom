@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="bit_contract_custom_product_template_form_view" model="ir.ui.view">
+		<field name="name">bit.contract.custom.product.template.form.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+					<xpath expr="//field[@name='recurring_rule_type']" position="after">
+						<field name="automatic_price" help="Si está marcado el precio se obtendrá aplicando automáticamente la lista de precios al producto. De lo contrario podrá introducir un precio manual."/>
+					</xpath>
+				</field>
+  </record>
+</odoo>

@@ -1,0 +1,27 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bit_contract_custom
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0-20211009\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-13 10:32+0000\n"
+"PO-Revision-Date: 2021-11-13 10:32+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bit_contract_custom
+#: model:ir.model.fields,field_description:bit_contract_custom.field_product_product__automatic_price
+#: model:ir.model.fields,field_description:bit_contract_custom.field_product_template__automatic_price
+msgid "Automatic Price"
+msgstr "¿Precio Automático?"
+
+#. module: bit_contract_custom
+#: model:ir.model,name:bit_contract_custom.model_product_template
+msgid "product.template"
+msgstr ""
