@@ -20,12 +20,10 @@ class ContractLine(models.Model):
             product_id = self.env['product.product'].browse(vals['product_id'])
             if product_id.automatic_price:
                 vals['automatic_price'] = True
-            if product_id.property_contract_template_id.recurring_day != 0:
-                recurring_next_date = datetime.datetime.now().replace(day=product_id.property_contract_template_id.recurring_day) if not product_id.property_contract_template_id.recurring_next_month else datetime.datetime.now(
-                ).replace(day=product_id.property_contract_template_id.recurring_day) + dateutil.relativedelta.relativedelta(months=1)
-
-            raise ValidationError("Test: %s ***" %
-                                  (recurring_next_date.date()))
+                if product_id.property_contract_template_id.recurring_day != 0:
+                    recurring_next_date = datetime.datetime.now().replace(day=product_id.property_contract_template_id.recurring_day) if not product_id.property_contract_template_id.recurring_next_month else datetime.datetime.now(
+                    ).replace(day=product_id.property_contract_template_id.recurring_day) + dateutil.relativedelta.relativedelta(months=1)
+                vals['recurring_next_date'] = recurring_next_date.date()
         res = super(ContractLine, self).create(
             vals_list)
         return res
