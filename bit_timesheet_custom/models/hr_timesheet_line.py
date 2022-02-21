@@ -14,3 +14,13 @@ class TimesheetLine(models.Model):
         comodel_name='account.analytic.line.worktype',
         string="Tipo",
     )
+
+    @api.onchange('project_id')
+    def _onchange_project_id(self):
+        if self.name is False and self.project_id and self.worktype_id:
+            self.name = self.project_id.name + '-' + self.worktype_id.name
+
+    @api.onchange('worktype_id')
+    def _onchange_worktype_id(self):
+        if self.name is False and self.project_id and self.worktype_id:
+            self.name = self.project_id.name + '-' + self.worktype_id.name

@@ -31,7 +31,9 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'data/timesheet_custom_data.xml',
         'view/hr_timesheet_line_view.xml',
+        'view/hr_timesheet_work_type_view.xml',
     ],
 
     'installable': True,

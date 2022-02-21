@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!--Main Timesheet Work Type FORM view-->
+	<record id="bit_timesheet_custom_timesheet_work_type_form_view" model="ir.ui.view">
+		<field name="name">bit.timesheet.custom.timesheet.work.type.form.view</field>
+        <field name="model">account.analytic.line.worktype</field>
+        <field name="arch" type="xml">
+			<form>
+				<header></header>
+				<sheet name="worktype">
+					<group name="group_top">
+						<group name="group_top_left">
+							<field name="name" />
+							<field name="type" />
+						</group>
+						<group name="group_top_right">
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+    </record>
+
+	<!--Main Timesheet Work Type TREE view-->
+    <record id="bit_timesheet_custom_timesheet_work_type_tree_view" model="ir.ui.view">
+	    <field name="name">bit.timesheet.custom.timesheet.work.type.tree.view</field>
+	    <field name="model">account.analytic.line.worktype</field>
+	    <field name="arch" type="xml">
+			<tree>
+				<field name="name" />
+				<field name="type" />
+			</tree>
+	   </field>
+	</record>
+
+	<record id="action_timesheet_work_type" model="ir.actions.act_window">
+		<field name="name">Tipos de Hora</field>
+		<field name="res_model">account.analytic.line.worktype</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<!-- Timesheet Work Type Menu -->
+	<menuitem id="work_type_menu" name="Tipos de Horas" parent="hr_timesheet.hr_timesheet_menu_configuration" action="action_timesheet_work_type" groups="base.group_system" sequence="220"/>
+
+
+</odoo>

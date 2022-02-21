@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data noupdate="1">
-
+		<!-- Timesheet Work Type -->
+		<record model="account.analytic.line.worktype" id="work_type_hn">
+			<field name="name">Hora Normal</field>
+			<field name="type">HN</field>
+		</record>
+		<record model="account.analytic.line.worktype" id="work_type_he">
+			<field name="name">Hora Extra</field>
+			<field name="type">HE</field>
+		</record>
 	</data>
 </odoo>
