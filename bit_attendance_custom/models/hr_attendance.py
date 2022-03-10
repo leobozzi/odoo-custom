@@ -122,6 +122,5 @@ class HrAttendance(models.Model):
     def unlink(self):
         if self.account_analytic_line_id:
             self.account_analytic_line_id.unlink()
-
         res = super(HrAttendance, self).unlink()
         return res
