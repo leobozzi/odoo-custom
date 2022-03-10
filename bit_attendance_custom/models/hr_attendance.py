@@ -51,26 +51,32 @@ class HrAttendance(models.Model):
     @api.model
     def create(self, vals):
         res = super(HrAttendance, self).create(vals)
-        date = datetime.datetime.strptime(
-            vals['check_in'], '%Y-%m-%d %H:%M:%S').date()
-        start_time = datetime.datetime.strptime(
-            vals['check_in'], '%Y-%m-%d %H:%M:%S')
-        stop_time = datetime.datetime.strptime(
-            vals['check_out'], '%Y-%m-%d %H:%M:%S')
-        hours = (stop_time - start_time).total_seconds() / 3600.0
-        project_id = self.env['project.project'].search(
+        date = False
+        start_time = False
+        stop_time = False
+        hours = 0.0
+        if 'check_in' in vals:
+            date = datetime.datetime.strptime(
+                vals['check_in'], '%Y-%m-%d %H:%M:%S').date() if isinstance(vals['check_in'], str) else vals['check_in'].date()
+            start_time = datetime.datetime.strptime(
+                vals['check_in'], '%Y-%m-%d %H:%M:%S') if isinstance(vals['check_in'], str) else vals['check_in']
+        if 'check_out' in vals:
+            stop_time = datetime.datetime.strptime(
+                vals['check_out'], '%Y-%m-%d %H:%M:%S') if isinstance(vals['check_out'], str) else vals['check_out']
+            hours = (stop_time - start_time).total_seconds() / 3600.0
+        project_id = False if 'project_id' not in vals else self.env['project.project'].search(
             [('id', '=', vals['project_id'])])
-        task_id = self.env['project.task'].search(
+        task_id = False if 'task_id' not in vals else self.env['project.task'].search(
             [('id', '=', vals['task_id'])])
-        description = '' if project_id.name is False else project_id.name
-        description = description if task_id.name is False else description + ' - ' + task_id.name
+        description = '' if project_id is False else project_id.name
+        description = description if task_id is False else description + ' - ' + task_id.name
         info = {
             'date': date,
             'employee_id': vals['employee_id'],
             'name': description,
-            'project_id': vals['project_id'],
-            'task_id': vals['task_id'],
-            'worktype_id': vals['worktype_id'],
+            'project_id': project_id,
+            'task_id': task_id,
+            'worktype_id': False if 'worktype_id' not in vals else vals['worktype_id'],
             'unit_amount': hours,
         }
         if info['project_id']:
