@@ -68,14 +68,18 @@ class HrAttendance(models.Model):
             [('id', '=', vals['project_id'])])
         task_id = False if 'task_id' not in vals else self.env['project.task'].search(
             [('id', '=', vals['task_id'])])
-        description = '' if project_id.name is False else project_id.name
-        description = description if task_id.name is False else description + ' - ' + task_id.name
+        description = ''
+        if 'project_id' in vals:
+            description = '' if vals['project_id'] is False else project_id.name
+        if 'task_id' in vals:
+            description = description if vals['task_id'] is False else description + \
+                ' - ' + task_id.name
         info = {
             'date': date,
             'employee_id': vals['employee_id'],
             'name': description,
-            'project_id': project_id.id,
-            'task_id': task_id.id,
+            'project_id': False if project_id is False else project_id.id,
+            'task_id': False if task_id is False else task_id.id,
             'worktype_id': False if 'worktype_id' not in vals else vals['worktype_id'],
             'unit_amount': hours,
         }
