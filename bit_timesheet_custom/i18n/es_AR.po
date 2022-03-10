@@ -2,3 +2,81 @@
 # This file contains the translation of the following modules:
 # 	* bit_timesheet_custom
 #
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0-20211110\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-10 11:03+0000\n"
+"PO-Revision-Date: 2022-03-10 11:03+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bit_timesheet_custom
+#: model:ir.model.fields,field_description:bit_timesheet_custom.field_account_analytic_line_worktype__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: bit_timesheet_custom
+#: model:ir.model.fields,field_description:bit_timesheet_custom.field_account_analytic_line_worktype__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: bit_timesheet_custom
+#: model:ir.model.fields,field_description:bit_timesheet_custom.field_account_analytic_line_worktype__name
+msgid "Description"
+msgstr "Descripción"
+
+#. module: bit_timesheet_custom
+#: model:ir.model.fields,field_description:bit_timesheet_custom.field_account_analytic_line_worktype__display_name
+msgid "Display Name"
+msgstr "Nombre"
+
+#. module: bit_timesheet_custom
+#: model:ir.model.fields,field_description:bit_timesheet_custom.field_account_analytic_line_worktype__id
+msgid "ID"
+msgstr ""
+
+#. module: bit_timesheet_custom
+#: model:ir.model.fields,field_description:bit_timesheet_custom.field_account_analytic_line_worktype____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: bit_timesheet_custom
+#: model:ir.model.fields,field_description:bit_timesheet_custom.field_account_analytic_line_worktype__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: bit_timesheet_custom
+#: model:ir.model.fields,field_description:bit_timesheet_custom.field_account_analytic_line_worktype__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: bit_timesheet_custom
+#: model:ir.model.fields,field_description:bit_timesheet_custom.field_account_analytic_line__worktype_id
+#: model:ir.model.fields,field_description:bit_timesheet_custom.field_account_analytic_line_worktype__type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: bit_timesheet_custom
+#: model:ir.actions.act_window,name:bit_timesheet_custom.action_timesheet_work_type
+msgid "Hour Types"
+msgstr "Tipos de Hora"
+
+#. module: bit_timesheet_custom
+#: model:ir.ui.menu,name:bit_timesheet_custom.work_type_menu
+msgid "Hour Types"
+msgstr "Tipos de Hora"
+
+#. module: bit_timesheet_custom
+#: model:ir.model,name:bit_timesheet_custom.model_account_analytic_line
+msgid "account.analytic.line"
+msgstr ""
+
+#. module: bit_timesheet_custom
+#: model:ir.model,name:bit_timesheet_custom.model_account_analytic_line_worktype
+msgid "account.analytic.line.worktype"
+msgstr ""

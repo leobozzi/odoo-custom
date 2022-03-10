@@ -11,9 +11,9 @@ class TimesheetWorkType(models.Model):
     _description = "account.analytic.line.worktype"
 
     name = fields.Char(
-        string="Descripción",
+        string="Description",
     )
 
     type = fields.Char(
-        string="Tipo"
+        string="Type"
     )

@@ -34,13 +34,13 @@
 	</record>
 
 	<record id="action_timesheet_work_type" model="ir.actions.act_window">
-		<field name="name">Tipos de Hora</field>
+		<field name="name">Hour Types</field>
 		<field name="res_model">account.analytic.line.worktype</field>
 		<field name="view_mode">tree,form</field>
 	</record>
 
 	<!-- Timesheet Work Type Menu -->
-	<menuitem id="work_type_menu" name="Tipos de Horas" parent="hr_timesheet.hr_timesheet_menu_configuration" action="action_timesheet_work_type" groups="base.group_system" sequence="220"/>
+	<menuitem id="work_type_menu" name="Hour Types" parent="hr_timesheet.hr_timesheet_menu_configuration" action="action_timesheet_work_type" groups="base.group_system" sequence="220"/>
 
 
 </odoo>

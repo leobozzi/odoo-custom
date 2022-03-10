@@ -12,7 +12,7 @@ class TimesheetLine(models.Model):
 
     worktype_id = fields.Many2one(
         comodel_name='account.analytic.line.worktype',
-        string="Tipo",
+        string="Type",
     )
 
     @api.onchange('project_id')
