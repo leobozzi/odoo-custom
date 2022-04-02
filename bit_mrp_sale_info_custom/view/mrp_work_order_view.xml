@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--MRP WorkOrder FORM view-->
+	<record id="bit_work_order_form_view" model="ir.ui.view">
+		<field name="name">bit.work.order.form.view</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='workorder_page_misc']//group//group//field[@name='production_id']" position="after">
+				<field name="partner_id"/>
+                <field name="sale_id"/>
+			</xpath>
+			<xpath expr="//page[@name='workorder_page_misc']//group//group//field[@name='workcenter_id']" position="after">
+				<field name="code"/>
+			</xpath>
+		</field>
+    </record>
+    <!--MRP WorkOrder TREE view-->
+	<record id="bit_work_order_tree_view" model="ir.ui.view">
+        <field name="name">bit.work.order.tree.view</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_view_inherit" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree//field[@name='product_id']" position="after">
+                <field name="partner_id" optional="hide"/>
+                <field name="sale_id" optional="hide"/>
+            </xpath>
+			<xpath expr="//tree//field[@name='workcenter_id']" position="after">
+                <field name="code" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+	<!--MRP WorkOder KANBAN view-->
+    <record id="bit_work_order_kanban_view" model="ir.ui.view">
+        <field name="name">bit.work.order.kanban.view</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.workcenter_line_kanban" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+				<field name="partner_id"/>
+				<field name="sale_id"/>
+			</field>
+			<xpath expr="//strong[@class='o_primary ml8']" position="after">
+				<strong>
+					<span t-if="record.partner_id.raw_value" class="o_kanban_record_subtitle">
+						<field name="partner_id"/>
+						<span class="text-muted">(<field name="sale_id"/>)</span>
+					</span>
+				</strong>
+				<span t-if="record.workcenter_id.raw_value" class="o_kanban_record_subtitle">
+					<field name="workcenter_id"/>
+					<span class="text-muted">(<field name="code"/>)</span>
+				</span>
+			</xpath>
+        </field>
+    </record>
+	<!--MRP WorkOrder CALENDAR view-->
+    <record id="bit_work_order_calendar_view" model="ir.ui.view">
+        <field name="name">bit.work.order.calendar.view</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.workcenter_line_calendar" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='production_id']" position="after">
+				<field name="partner_id"/>
+				<field name="sale_id"/>
+			</xpath>
+			<xpath expr="//field[@name='workcenter_id']" position="after">
+				<field name="code"/>
+			</xpath>
+        </field>
+    </record>
+</odoo>

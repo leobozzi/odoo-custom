@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--MRP Production FORM view-->
+	<record id="bit_production_order_form_view" model="ir.ui.view">
+		<field name="name">bit.production.order.form.view</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group//field[@name='user_id']" position="before">
+				<field name="partner_id"/>
+                <field name="sale_id" domain="[('state','=','sale')]" options="{'no_create': True, 'no_create_edit': True}"/>
+			</xpath>
+		</field>
+    </record>
+    <!--MRP Production TREE view-->
+    <record id="bit_production_order_tree_view" model="ir.ui.view">
+        <field name="name">bit.production.order.tree.view</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree//field[@name='date_planned_start']" position="after">
+                <field name="partner_id"/>
+                <field name="sale_id" domain="[('state','=','sale')]" options="{'no_create': True, 'no_create_edit': True}"/>
+            </xpath>
+        </field>
+    </record>
+	<!--MRP Production KANBAN view-->
+    <record id="bit_production_order_kanban_view" model="ir.ui.view">
+        <field name="name">bit.production.order.kanban.view</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_kanban_view" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+				<field name="partner_id"/>
+				<field name="sale_id"/>
+			</field>
+			<xpath expr="//strong[@class='o_kanban_record_title']" position="after">
+				<strong>
+					<span t-if="record.partner_id.raw_value" class="o_kanban_record_subtitle">
+						<field name="partner_id"/>
+						<span class="text-muted">(<field name="sale_id"/>)</span>
+					</span>
+				</strong>
+			</xpath>
+        </field>
+    </record>
+	<!--MRP Production CALENDAR view-->
+    <record id="bit_production_order_calendar_view" model="ir.ui.view">
+        <field name="name">bit.production.order.calendar.view</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.view_production_calendar" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+				<field name="partner_id"/>
+				<field name="sale_id"/>
+			</xpath>
+        </field>
+    </record>
+</odoo>
