@@ -5,9 +5,6 @@ from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools.translate import _
 
-import logging
-_logger = logging.getLogger(__name__)
-
 
 class WorkOrder(models.Model):
     _inherit = 'mrp.workorder'

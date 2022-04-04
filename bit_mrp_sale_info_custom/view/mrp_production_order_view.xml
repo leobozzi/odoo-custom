@@ -10,6 +10,9 @@
 				<field name="partner_id"/>
                 <field name="sale_id" domain="[('state','=','sale')]" options="{'no_create': True, 'no_create_edit': True}"/>
 			</xpath>
+			<xpath expr="//group//field[@name='origin']" position="before">
+				<field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create': True, 'no_create_edit': True}"/>
+			</xpath>
 		</field>
     </record>
     <!--MRP Production TREE view-->
@@ -22,6 +25,9 @@
                 <field name="partner_id"/>
                 <field name="sale_id" domain="[('state','=','sale')]" options="{'no_create': True, 'no_create_edit': True}"/>
             </xpath>
+			<xpath expr="//tree//field[@name='origin']" position="before">
+				<field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create': True, 'no_create_edit': True}"/>
+			</xpath>
         </field>
     </record>
 	<!--MRP Production KANBAN view-->
@@ -33,14 +39,22 @@
             <field name="product_id" position="after">
 				<field name="partner_id"/>
 				<field name="sale_id"/>
+				<field name="tag_ids"/>
 			</field>
 			<xpath expr="//strong[@class='o_kanban_record_title']" position="after">
-				<strong>
-					<span t-if="record.partner_id.raw_value" class="o_kanban_record_subtitle">
-						<field name="partner_id"/>
-						<span class="text-muted">(<field name="sale_id"/>)</span>
+				<div>
+					<strong>
+						<span t-if="record.partner_id.raw_value" class="o_kanban_record_subtitle">
+							<field name="partner_id"/>
+							<span class="text-muted">(<field name="sale_id"/>)</span>
+						</span>
+					</strong>
+				</div>
+				<div>
+					<span>
+						<field name="tag_ids" options="{'color_field': 'color'}"/>
 					</span>
-				</strong>
+				</div>
 			</xpath>
         </field>
     </record>
@@ -53,6 +67,7 @@
             <xpath expr="//field[@name='user_id']" position="after">
 				<field name="partner_id"/>
 				<field name="sale_id"/>
+				<field name="tag_ids" widget="many2many_tags"/>
 			</xpath>
         </field>
     </record>

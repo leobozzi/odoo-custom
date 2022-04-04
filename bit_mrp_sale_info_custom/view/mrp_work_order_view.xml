@@ -41,16 +41,22 @@
 				<field name="sale_id"/>
 			</field>
 			<xpath expr="//strong[@class='o_primary ml8']" position="after">
-				<strong>
-					<span t-if="record.partner_id.raw_value" class="o_kanban_record_subtitle">
-						<field name="partner_id"/>
-						<span class="text-muted">(<field name="sale_id"/>)</span>
+				<div>
+					<strong>
+						<span t-if="record.partner_id.raw_value" class="o_kanban_record_subtitle">
+							<field name="partner_id"/>
+							<span class="text-muted">(<field name="sale_id"/>)</span>
+						</span>
+					</strong>
+					<span t-if="record.workcenter_id.raw_value" class="o_kanban_record_subtitle">
+						<field name="workcenter_id"/>
+						<span class="text-muted">(<field name="code"/>)</span>
 					</span>
-				</strong>
-				<span t-if="record.workcenter_id.raw_value" class="o_kanban_record_subtitle">
-					<field name="workcenter_id"/>
-					<span class="text-muted">(<field name="code"/>)</span>
-				</span>
+				</div>
+				<div>
+					<span>
+					</span>
+				</div>
 			</xpath>
         </field>
     </record>

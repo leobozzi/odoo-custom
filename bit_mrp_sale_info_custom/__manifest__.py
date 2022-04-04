@@ -35,6 +35,7 @@
         'data/mrp_sale_info_custom_data.xml',
         'view/mrp_production_order_view.xml',
         'view/mrp_work_order_view.xml',
+        'view/mrp_production_order_tag_view.xml',
     ],
 
     'installable': True,
