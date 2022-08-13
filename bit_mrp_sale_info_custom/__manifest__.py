@@ -26,7 +26,7 @@
 
     # any module necessary for this one to work correctly
     'depends': [
-        'base', 'mrp', 'sale', 'mrp_analytic',
+        'base', 'mrp', 'sale', 'mrp_analytic', 'mrp_unbuild_tracked_raw_material',
     ],
 
     # always loaded
