@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Product Template FORM view -->
+        <record model="ir.ui.view" id="bit_product_template_form_view">
+            <field name="name">bit product_template_form_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+              <xpath expr="//notebook//page[@name='invoicing']" position="after">
+                <page name="services" string="Servicios adheridos">
+                  <field name="product_services_ids" />
+                </page>
+              </xpath>
+            </field>
+        </record>
+
+        <!-- Product Services FORM view -->
+        <record model="ir.ui.view" id="bit_product_services_form_view">
+            <field name="name">bit product_services_form_view</field>
+            <field name="model">product.services</field>
+            <field name="arch" type="xml">
+              <form>
+                <sheet name="product_services">
+                  <group name="group_top">
+						        <group name="group_top_left">
+                      <field name="product_id" domain="[('type','=','service')]"/>
+                      <field name="partner_id" domain="[('supplier','=',True)]"/>
+                    </group>
+                    <group name="group_top_right">
+                      <field name="partner_number"/>
+                      <field name="account_number"/>
+                      <field name="parent_id"/>
+                    </group>
+                  </group>
+              </sheet>
+            </form>
+          </field>
+        </record>
+
+        <!-- Product Services TREE view -->
+        <record model="ir.ui.view" id="bit_product_services_tree_view">
+            <field name="name">bit product_services_tree_view</field>
+            <field name="model">product.services</field>
+            <field name="arch" type="xml">
+              <tree>
+                <field name="product_id"/>
+                <field name="partner_id"/>
+                <field name="parent_id" />
+                <field name="partner_number"/>
+                <field name="account_number"/>
+              </tree>
+            </field>
+        </record>
+
+        <record id="action_product_services" model="ir.actions.act_window">
+	         <field name="name">Serivicios adheridos</field>
+           <field name="res_model">product.services</field>
+           <field name="view_mode">tree,form</field>
+        </record>
+
+ 	     <!-- Product Services - Servicios adheridos Menu -->
+       <menuitem id="product_services_menu" name="Servicios adheridos" parent="sale.product_menu_catalog" sequence="3" action="action_product_services" groups="sales_team.group_sale_salesman"/>
+
+    </data>
+</odoo>

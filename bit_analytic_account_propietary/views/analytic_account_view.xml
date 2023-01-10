@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Analytic Account FORM view -->
+        <record model="ir.ui.view" id="bit_analytic_account_form_view">
+            <field name="name">bit analytic_account_form_view</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+            <field name="arch" type="xml">
+              <xpath expr="//group[@name='main']//group//field[@name='partner_id']" position="after">
+                <field name="is_property" />
+                <field name="date" attrs="{'invisible': [('is_property','=',False)]}"/>
+                <field name="description" attrs="{'invisible': [('is_property','=',False)]}"/>
+              </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
