@@ -11,6 +11,7 @@
                 <field name="is_property" />
                 <field name="date" attrs="{'invisible': [('is_property','=',False)]}"/>
                 <field name="description" attrs="{'invisible': [('is_property','=',False)]}"/>
+                <field name="dynamic_description" attrs="{'invisible': 1}"/>
               </xpath>
             </field>
         </record>

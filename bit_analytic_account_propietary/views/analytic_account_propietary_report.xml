@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
-    <report id="bit_analytic_account_propietary_report"
-      string="Reporte"
-      model="account.analytic.account"
-      report_type="qweb-pdf"
-      name="bit_analytic_account_propietary.analytic_account_propietary_report"/>
-    <template id="analytic_account_propietary_report">
+		<report id="bit_analytic_account_propietary_report"
+			string="Reporte"
+			model="account.analytic.account"
+			report_type="qweb-pdf"
+			name="bit_analytic_account_propietary.analytic_account_propietary_report" />
+		<template id="analytic_account_propietary_report">
 			<t t-call="web.html_container">
 				<t t-call="web.external_layout">
-					<div class="page" style="
+					<div class="page"
+						style="
 						background-image: url('/bit_analytic_account_propietary/static/img/background_moreno.jpg');
 						background-size: cover;
     				background-position: center;
@@ -18,102 +19,213 @@
 						<!-- Report header content -->
 						<t t-foreach="docs" t-as="o">
 							<!-- Place and Date -->
-              <div class="row">
-                <div class="col-12">
-                  <h4 class="text-right"><span t-field="o.company_id.city" />, <span t-field="o.date" t-options='{"format": "dd MMMM yyyy"}' /></h4>
-                </div>
-              </div>
 							<div class="row">
-                <div class="col-12">
-                  <span>&#160;</span>
-                </div>
-              </div>
+								<div class="col-12">
+									<h4 class="text-right"><span t-field="o.company_id.city" />, <span
+											t-field="o.date" t-options='{"format": "dd MMMM yyyy"}' /></h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12">
+									<span>&#160;</span>
+								</div>
+							</div>
 							<!-- Description -->
-              <div class="row">
-                <div class="col-12">
-                  <h4><span t-field="o.description" /></h4>
-                </div>
-              </div>
-              <!-- Separator -->
-              <div style="border: 1px solid black;"></div>
-              <div class="row">
-                <div class="col-12">
-                  <span>&#160;</span>
-                </div>
-              </div>
-							<!-- Ingresos / Alquileres -->
 							<div class="row">
-              	<div class="col-12"><strong>Ingresos / Alquileres:</strong></div>
-              </div>
-							<div style="border: 1px solid black;"></div>
-							<t t-set="total_ingresos" t-value="0" />
-							<t t-set="total_ingresos_alquileres" t-value="0" />
-							<t t-set="total_egresos_alquileres" t-value="0" />
-              <table class="table table-sm" style="font-size:11px">
-                <thead>
-                  <tr>
-										<th scope="col">Fecha</th>
-                    <th scope="col">Descripción</th>
-										<th scope="col">Importe</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <t t-foreach="o.line_ids" t-as="line_id">
-										<t t-if="line_id.date.month == o.date.month and line_id.date.year == o.date.year">
-											<t t-if="line_id.amount&gt;0">
-												<t t-set="total_ingresos" t-value="total_ingresos+line_id.amount" />
-												<t t-if="line_id.product_category_id.name != Expensas">
-													<t t-set="total_ingresos_alquileres" t-value="total_ingresos_alquileres+line_id.amount" />
-												</t>
-		                    <tr>
-													<td scope="row"><t t-esc="line_id.date" /></td>
-		                      <td scope="row"><t t-esc="line_id.name" /></td>
-													<td scope="row">$&#160;<t t-esc="line_id.amount"/></td>
-		                    </tr>
-											</t>
-											<t t-if="line_id.amount&lt;0 and line_id.product_category_id.name != Expensas">
-												<t t-set="total_egresos_alquileres" t-value="total_egresos_alquileres+abs(line_id.amount)" />
-				               </t>
-										</t>
-                  </t>
-                </tbody>
-								<tfoot>
-									<tr>
-										<tr>
-											<td scope="row"></td>
-											<td scope="row"></td>
-											<td scope="row"><strong>Total</strong></td>
-											<td scope="row"><strong>$&#160;<t t-esc="total_ingresos" /></strong></td>
-										</tr>
-									</tr>
-								</tfoot>
-              </table>
-							<!-- Gastos -->
-							<div class="row">
-              	<div class="col-12"><strong>Gastos:</strong></div>
-              </div>
+								<div class="col-12">
+									<span t-raw="o.dynamic_description" />
+								</div>
+							</div>
+							<!-- Separator -->
 							<div style="border: 1px solid black;"></div>
 							<div class="row">
 								<div class="col-12">
 									<span>&#160;</span>
 								</div>
 							</div>
-							<!-- Honorarios Inmobiliaria -->
+							<!-- Ingresos / Alquileres -->
 							<div class="row">
-								<div class="col-6"><strong>Honorarios:</strong></div>
-                <div class="col-3"><strong>$&#160;<span t-esc="total_ingresos_alquileres-total_egresos_alquileres" /></strong></div>
-                <div class="col-3"></div>
+								<div class="col-12">
+									<strong>INGRESOS / ALQUILERES:</strong>
+								</div>
 							</div>
+							<div style="border: 1px solid black;"></div>
+							<t t-set="total_ingresos_alquileres" t-value="0" />
+							<table class="table table-sm" style="font-size:14px">
+								<thead>
+									<tr>
+										<th scope="col">Fecha</th>
+										<th scope="col">Descripción</th>
+										<th scope="col">Importe</th>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-foreach="o.line_ids" t-as="line_id">
+										<t
+											t-if="line_id.date.month == o.date.month and line_id.date.year == o.date.year">
+											<t
+												t-if="line_id.move_id.journal_id.name == 'Facturas de clientes' and line_id.product_category_id.name != 'Expensas'">
+												<t t-set="total_ingresos_alquileres"
+													t-value="total_ingresos_alquileres+line_id.amount" />
+												<tr>
+													<td scope="row">
+														<t t-esc="line_id.date" />
+													</td>
+													<td scope="row">
+														<t t-esc="line_id.name" />
+													</td>
+													<td scope="row">$&#160;<t
+															t-esc="line_id.amount" /></td>
+												</tr>
+											</t>
+										</t>
+									</t>
+								</tbody>
+								<tfoot>
+									<tr>
+										<tr>
+											<td scope="row"></td>
+											<td scope="row">
+												<p class="text-right">
+													<strong>SUB TOTAL:&#160;</strong>
+												</p>
+											</td>
+											<td scope="row">
+												<strong>$&#160;<t t-esc="total_ingresos_alquileres" /></strong>
+											</td>
+										</tr>
+									</tr>
+								</tfoot>
+							</table>
+							<!-- Gastos -->
+							<div class="row">
+								<div class="col-12">
+									<strong>GASTOS:</strong>
+								</div>
+							</div>
+							<div style="border: 1px solid black;"></div>
+							<t t-set="total_egresos_alquileres" t-value="0" />
+							<table class="table table-sm" style="font-size:14px">
+								<thead>
+									<tr>
+										<th scope="col">Fecha</th>
+										<th scope="col">Descripción</th>
+										<th scope="col">Importe</th>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-foreach="o.line_ids" t-as="line_id">
+										<t
+											t-if="line_id.date.month == o.date.month and line_id.date.year == o.date.year">
+											<t
+												t-if="line_id.move_id.journal_id.name == 'Facturas de propietarios' and line_id.product_category_id.name == 'Expensas'">
+												<t t-set="total_egresos_alquileres"
+													t-value="total_egresos_alquileres+line_id.amount" />
+												<tr>
+													<td scope="row">
+														<t t-esc="line_id.date" />
+													</td>
+													<td scope="row">
+														<t t-esc="line_id.name" />
+													</td>
+													<td scope="row">$&#160;<t
+															t-esc="line_id.amount" /></td>
+												</tr>
+											</t>
+										</t>
+									</t>
+								</tbody>
+								<tfoot>
+									<tr>
+										<tr>
+											<td scope="row"></td>
+											<td scope="row">
+												<p class="text-right">
+													<strong>SUB TOTAL:&#160;</strong>
+												</p>
+											</td>
+											<td scope="row">
+												<strong>$&#160;<t t-esc="total_egresos_alquileres" /></strong>
+											</td>
+										</tr>
+									</tr>
+								</tfoot>
+							</table>
+							<!-- Honorarios -->
+							<div class="row">
+								<div class="col-12">
+									<strong>HONORARIOS INMOBILIARIA:</strong>
+								</div>
+							</div>
+							<div style="border: 1px solid black;"></div>
+							<t t-set="total_honorarios_alquileres" t-value="0" />
+							<table class="table table-sm" style="font-size:14px">
+								<thead>
+									<tr>
+										<th scope="col">Fecha</th>
+										<th scope="col">Descripción</th>
+										<th scope="col">Importe</th>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-foreach="o.line_ids" t-as="line_id">
+										<t
+											t-if="line_id.date.month == o.date.month and line_id.date.year == o.date.year">
+											<t
+												t-if="line_id.move_id.journal_id.name == 'Facturas de propietarios' and line_id.product_category_id.name != 'Expensas'">
+												<t t-set="total_honorarios_alquileres"
+													t-value="total_honorarios_alquileres+line_id.amount" />
+												<tr>
+													<td scope="row">
+														<t t-esc="line_id.date" />
+													</td>
+													<td scope="row">
+														<t t-esc="line_id.name" />
+													</td>
+													<td scope="row">$&#160;<t
+															t-esc="line_id.amount" /></td>
+												</tr>
+											</t>
+										</t>
+									</t>
+								</tbody>
+								<tfoot>
+									<tr>
+										<tr>
+											<td scope="row"></td>
+											<td scope="row">
+												<p class="text-right">
+													<strong>SUB TOTAL:&#160;</strong>
+												</p>
+											</td>
+											<td scope="row">
+												<strong>$&#160;<t t-esc="total_honorarios_alquileres" /></strong>
+											</td>
+										</tr>
+									</tr>
+								</tfoot>
+							</table>
+							<div class="row">
+								<div class="col-12">
+									<span>&#160;</span>
+								</div>
+							</div>
+							<div style="border: 1px solid black;"></div>
 							<!-- Total para el propietario -->
 							<div class="row">
-              	<div class="col-6"><strong>Total para el propietario:</strong></div>
-								<div class="col-3"><strong>$&#160;<span t-esc="total_egresos_alquileres" /></strong></div>
+								<div class="col-6">
+									<strong>TOTAL PARA EL PROPIETARIO:</strong>
+								</div>
 								<div class="col-3"></div>
-              </div>
+								<div class="col-3">
+									<strong>$&#160;<span
+											t-esc="total_ingresos_alquileres-total_egresos_alquileres-total_honorarios_alquileres" /></strong>
+								</div>
+							</div>
 						</t>
 					</div>
 				</t>
 			</t>
-    </template>
-  </data>
+		</template>
+	</data>
 </odoo>
