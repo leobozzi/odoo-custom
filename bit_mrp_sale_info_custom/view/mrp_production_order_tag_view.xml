@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--MRP Production Order Tag FORM view-->
+	<record id="bit_production_order_tag_form_view" model="ir.ui.view">
+		<field name="name">bit.production.order.tag.form.view</field>
+        <field name="model">mrp.production.tag</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group name="group_top">
+    				    <group name="group_top_left">
+                            <field name="name" />
+                            <field name="color" />
+                        </group>
+                        <group name="group_top_right">
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+		</field>
+    </record>
+    <!--MRP Production Order Tag LIST view-->
+	<record id="bit_production_order_tag_list_view" model="ir.ui.view">
+		<field name="name">bit.production.order.tag.list.view</field>
+        <field name="model">mrp.production.tag</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="color" />
+            </tree>
+		</field>
+    </record>
+
+    <record id="action_production_order_tag" model="ir.actions.act_window">
+		<field name="name">Production Order Tags</field>
+		<field name="res_model">mrp.production.tag</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+    <!-- MRP Production Order Tag Menu -->
+    <menuitem id="production_order_tag_menu" name="Production Order Tags" parent="mrp.menu_mrp_configuration" action="action_production_order_tag" sequence="200" groups="mrp.group_mrp_manager"/>
+
+</odoo>
