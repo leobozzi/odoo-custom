@@ -2,7 +2,7 @@
     "name": "Sale Documents Integration",
     "summary": "This module allows to save attachments of a sale order "
     "to a particular folder of Documents.",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Documents",
     "author": "BizzAppDev Systems Pvt. Ltd.",
     "website": "http://www.bizzappdev.com",
