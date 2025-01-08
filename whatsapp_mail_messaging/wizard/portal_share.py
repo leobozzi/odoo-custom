@@ -43,17 +43,21 @@ class PortalShare(models.TransientModel):
         parameters."""
         if self.note and self.mobile_number:
             if self.res_model == 'sale.order':
-                common_message = ('You have been invited to access the '
-                                  'following Sale Order.')
+                #common_message = ('You have been invited to access the '
+                #                  'following Sale Order.')
+                common_message = ('En el siguiente link se encuentra su Orden de Venta.')
             elif self.res_model == 'account.move':
-                common_message = ('You have been invited to access the '
-                                  'following Invoice.')
+                #common_message = ('You have been invited to access the '
+                #                  'following Invoice.')
+                common_message = ('En el siguiente link se encuentra su Factura.')
             elif self.res_model == 'purchase.order':
-                common_message = ('You have been invited to access the '
-                                  'following Purchase.')
+                #common_message = ('You have been invited to access the '
+                #                  'following Purchase.')
+                common_message = ('En el siguiente link se encuentra su Orden de Compra.')
             else:
-                common_message = ('You have been invited to access the '
-                                  'following Document.')
+                #common_message = ('You have been invited to access the '
+                #                  'following Document.')
+                common_message = ('En el siguiente link se encuentra su Documento.')
             message_string = (self.note + '%0a' + common_message + '%0a' +
                               urllib.quote(self.share_link))
             related_record = self.env[self.res_model].search([

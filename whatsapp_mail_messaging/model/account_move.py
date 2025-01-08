@@ -37,13 +37,21 @@ class AccountMove(models.Model):
             'whatsapp_mail_messaging.whatsapp_send_message_view_form').id
         ctx = dict(self.env.context)
         message_template = self.company_id.whatsapp_message
+        #default_message = (
+        #        "Hi" + " " + self.partner_id.name + ',' + '\n' +
+        #        "Here is your invoice" + ' ' + self.name + ' ' + "amounting" +
+        #        ' ' + str(self.amount_total) + self.currency_id.symbol + ' ' +
+        #        "from " + self.company_id.name +
+        #        ". Please remit payment at your earliest convenience. " + '\n'
+        #        + "Please use the following communication for your payment" +
+        #        ' ' + self.name)
         default_message = (
-                "Hi" + " " + self.partner_id.name + ',' + '\n' +
-                "Here is your invoice" + ' ' + self.name + ' ' + "amounting" +
+                "Hola" + " " + self.partner_id.name + ',' + '\n' +
+                "Esta es su Factura" + ' ' + self.name + ' ' + "con importe" +
                 ' ' + str(self.amount_total) + self.currency_id.symbol + ' ' +
-                "from " + self.company_id.name +
-                ". Please remit payment at your earliest convenience. " + '\n'
-                + "Please use the following communication for your payment" +
+                "desde " + self.company_id.name +
+                ". Por favor remita el pago lo antes posible. " + '\n'
+                + "Por favor utilice la siguiente comunicación para informar su pago" +
                 ' ' + self.name)
         message = message_template if message_template else default_message
         ctx.update({
@@ -84,10 +92,13 @@ class AccountMove(models.Model):
             compose_form_id = self.env.ref(
                 'whatsapp_mail_messaging.whatsapp_send_message_view_form').id
             ctx = dict(self.env.context)
-            message = ("Hi" + " " + self.partner_id.name + ',' + '\n' +
-                       "Your Orders are" + '\n' + account_move_numbers + ' ' +
-                       "is ready for review.Do not hesitate to contact us if "
-                       "you have any questions.")
+            #message = ("Hi" + " " + self.partner_id.name + ',' + '\n' +
+            #           "Your Orders are" + '\n' + account_move_numbers + ' ' +
+            #           "is ready for review.Do not hesitate to contact us if "
+            #           "you have any questions.")
+            message = ("Hola" + " " + self.partner_id.name + ',' + '\n' +
+                       "Sus Órdenes son" + '\n' + account_move_numbers + ' ' +
+                       "No dude en contactarnos si tiene alguna duda.")
             ctx.update({
                 'default_message': message,
                 'default_partner_id': account_move_ids[0].partner_id.id,

@@ -81,10 +81,13 @@ class SaleOrder(models.Model):
             compose_form_id = self.env.ref(
                 'whatsapp_mail_messaging.whatsapp_send_message_view_form').id
             ctx = dict(self.env.context)
-            message = ("Hi" + " " + self.partner_id.name + ',' + '\n' +
-                       "Your Orders are" + '\n' + sale_numbers + ' ' + '\n' +
-                       "is ready for review.Do not hesitate to contact us if "
-                       "you have any questions.")
+            #message = ("Hi" + " " + self.partner_id.name + ',' + '\n' +
+            #           "Your Orders are" + '\n' + sale_numbers + ' ' + '\n' +
+            #           "is ready for review.Do not hesitate to contact us if "
+            #           "you have any questions.")
+            message = ("Hola" + " " + self.partner_id.name + ',' + '\n' +
+                       "Sus Órdenes son" + '\n' + sale_numbers + ' ' + '\n' +
+                       "No dude en contactarnos si tiene alguna duda.")
             ctx.update({
                 'default_message': message,
                 'default_partner_id': sale_order_ids[0].partner_id.id,
