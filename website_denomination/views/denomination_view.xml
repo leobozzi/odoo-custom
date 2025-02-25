@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- Tree view -->
+		<record id="view_gift_voucher_tree" model="ir.ui.view">
+			<field name="name">Gift Voucher</field>
+			<field name="model">gift.voucher</field>
+			<field name="priority">2</field>
+			<field name="arch" type="xml">
+				<tree string="Gift Voucher">
+					<field name="name" />
+					<field name="amount" />
+					<field name="used" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_patient_birthday_alert_form" model="ir.ui.view">
+			<field name="name">Gift Voucher</field>
+			<field name="model">gift.voucher</field>
+			<field name="arch" type="xml">
+				<form string="Gift Voucher" version="7.0">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="used" />
+							</group>
+							<group>
+								<field name="amount" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Comment" name="comment">
+								<field name="comment" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<!-- Search View -->
+		<record id="view_gift_voucher_search" model="ir.ui.view">
+			<field name="name">Gift Voucher</field>
+			<field name="model">gift.voucher</field>
+			<field name="type">search</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<search string="Search Gift Voucher">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="act_view_gift_voucher">
+			<field name="name">Gift Voucher</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">gift.voucher</field>
+			<field name="view_mode">tree,form</field>
+			<field name="search_view_id" ref="view_gift_voucher_search" />
+			<field name="domain">[]</field>
+			<field name="context">{}</field>
+		</record>
+
+		<menuitem id="menu_view_gift_voucher" action="act_view_gift_voucher"
+			name="Gift Voucher" parent="sale.product_menu_catalog" sequence="50" />
+		
+		<record id="product_template_view_inherit" model="ir.ui.view">
+			<field name="name">Product</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_normal_form_view" />
+			<field name="arch" type="xml">
+				<field name="categ_id" position="after">
+					<field name="denomination"/>
+				</field>
+			</field>
+		</record>
+		
+		<record id="product_view_inherit" model="ir.ui.view">
+			<field name="name">Product</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product.product_template_only_form_view" />
+			<field name="arch" type="xml">
+				<field name="categ_id" position="after">
+					<field name="denomination"/>
+				</field>
+			</field>
+		</record>
+		
+		<record id="sale_order_view_inherit" model="ir.ui.view">
+			<field name="name">Sale Order</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form" />
+			<field name="arch" type="xml">
+				<field name="payment_term_id" position="after">
+					<field name="gift_voucher_id" readonly="1"/>
+				</field>
+			</field>
+		</record>
+	</data>
+</openerp>

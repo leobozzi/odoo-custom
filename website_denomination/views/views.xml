@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        
+         <!-- Product VIEW -->
+        <record model="ir.ui.view" id="sale_order_voucher_form_view">
+            <field name="name">sale.order.discount.voucher.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+            
+            <!-- Add Custom Message Field -->
+		        <notebook position="inside">
+		            <page string="Notes">
+				  <group>
+					 <group>
+				                <field name="message"/>
+					 </group>
+				     </group>
+				</page>
+		        </notebook>
+		        
+		        <!-- Add Voucher Code Field -->
+                <xpath expr="//field[@name='tax_totals_json']" position="before">
+                        <field name="amount_voucher" widget="monetary"/>
+                        <field name="voucher_code" />
+                </xpath>
+            </field>
+        </record>
+
+</odoo>
