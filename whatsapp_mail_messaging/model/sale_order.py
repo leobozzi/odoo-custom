@@ -37,12 +37,12 @@ class SaleOrder(models.Model):
             'whatsapp_mail_messaging.whatsapp_send_message_view_form').id
         ctx = dict(self.env.context)
         message_template = self.company_id.whatsapp_message
-        default_message = ("Hi" + " " + self.partner_id.name + ',' + '\n' +
-                           "Your quotation" + ' ' + self.name + ' ' + "amounting" + ' '
+        default_message = ("Hola" + " " + self.partner_id.name + ',' + '\n' +
+                           "Tu cotización" + ' ' + self.name + ' ' + "por un total de" + ' '
                            + str(
                     self.amount_total) + self.currency_id.symbol + ' ' +
-                           "is ready for review.Do not hesitate to contact us if you "
-                           "have any questions.")
+                           "está lista para revisión. No dudes en contactarnos si"
+                           " tienes alguna pregunta.")
         message = message_template if message_template else default_message
         ctx.update({
             'default_message': message,
@@ -82,10 +82,10 @@ class SaleOrder(models.Model):
             compose_form_id = self.env.ref(
                 'whatsapp_mail_messaging.whatsapp_send_message_view_form').id
             ctx = dict(self.env.context)
-            message = ("Hi" + " " + self.partner_id.name + ',' + '\n' +
-                       "Your Orders are" + '\n' + sale_numbers + ' ' + '\n' +
-                       "is ready for review.Do not hesitate to contact us if "
-                       "you have any questions.")
+            message = ("Hola" + " " + self.partner_id.name + ',' + '\n' +
+                       "Tus pedidos son" + '\n' + sale_numbers + ' ' + '\n' +
+                       "están listos para revisión. No dudes en contactarnos si"
+                       " tienes alguna pregunta.")
             ctx.update({
                 'default_message': message,
                 'default_partner_id': sale_order_ids[0].partner_id.id,
@@ -103,5 +103,5 @@ class SaleOrder(models.Model):
             }
         else:
             raise UserError(_(
-                'It appears that you have selected orders from multiple'
-                ' customers. Please select orders from a single customer.'))
+                'Parece que has seleccionado pedidos de múltiples'
+                ' clientes. Por favor, selecciona pedidos de un solo cliente.'))
